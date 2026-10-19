@@ -146,14 +146,6 @@ npm run preview   # lihat hasil build
 npm run lint      # cek kode dengan oxlint
 ```
 
-## Akun demo
-
-| Peran | Email                | Password   |
-| ----- | -------------------- | ---------- |
-| Admin | `admin@growlab.test` | `admin123` |
-
-Akun admin ini hanya untuk pengembangan lokal. **Ganti passwordnya** sebelum dipakai di server yang bisa diakses orang lain. Untuk akun pelanggan, daftar lewat halaman Register.
-
 ## Ringkasan API
 
 Semua endpoint berada di bawah `/api`. Tanda **(admin)** berarti butuh token admin.
