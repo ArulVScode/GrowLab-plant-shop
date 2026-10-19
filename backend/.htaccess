@@ -1,0 +1,15 @@
+# Blocks direct browser access to config/, src/, and db/ — only public/
+
+# should ever be reachable over HTTP. Needed because the vhost DocumentRoot
+
+# points at a shared parent folder (e.g. the whole "matkul" directory)
+
+# rather than straight at backend/public.
+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+</IfModule>

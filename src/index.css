@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+    font-feature-settings: "ss01";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-bold tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-yellow text-ink;
+  }
+
+  :focus-visible {
+    outline: 3px solid #111111;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .nb-surface {
+    @apply border-3 border-ink bg-paper shadow-hard;
+  }
+
+  .nb-surface-sm {
+    @apply border-2 border-ink bg-paper shadow-hard-sm;
+  }
+
+  .nb-btn {
+    @apply inline-flex items-center justify-center gap-2 border-3 border-ink font-display font-bold
+      px-5 py-3 shadow-hard transition-transform duration-150 ease-out
+      hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg
+      active:translate-x-0 active:translate-y-0 active:shadow-none
+      disabled:opacity-50 disabled:pointer-events-none select-none;
+  }
+
+  .nb-btn-primary {
+    @apply nb-btn bg-leaf text-ink;
+  }
+
+  .nb-btn-accent {
+    @apply nb-btn bg-yellow text-ink;
+  }
+
+  .nb-btn-dark {
+    @apply nb-btn bg-ink text-cream;
+  }
+
+  .nb-btn-outline {
+    @apply nb-btn bg-paper text-ink;
+  }
+
+  .nb-chip {
+    @apply inline-flex items-center gap-1.5 border-2 border-ink px-3 py-1 text-xs font-bold font-display;
+  }
+
+  .nb-input {
+    @apply w-full border-3 border-ink bg-paper px-4 py-3 font-body text-ink placeholder:text-muted
+      focus:outline-none focus:shadow-hard-sm transition-shadow;
+  }
+
+  .section-pad {
+    @apply px-5 md:px-10 lg:px-16;
+  }
+
+  .container-max {
+    @apply max-w-[1400px] mx-auto;
+  }
+}
