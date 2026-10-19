@@ -182,17 +182,6 @@ Semua endpoint berada di bawah `/api`. Tanda **(admin)** berarti butuh token adm
 
 Tabel utama: `admins`, `admin_tokens`, `customers`, `customer_tokens`, `customer_addresses`, `categories`, `products`, `product_images`, `product_benefits`, `wishlists`, `orders`, `order_items`, `order_status_history`, dan `settings`.
 
-## Deploy ke shared hosting
-
-Proyek ini dijalankan di hosting gratis (InfinityFree) dengan cara berikut:
-
-1. Buat database di panel hosting, lalu import `schema.sql` dan `seed.sql` lewat phpMyAdmin (hapus baris `CREATE DATABASE` dan `USE ...` dari file SQL dulu kalau hosting menolaknya).
-2. Isi `backend/config/config.php` di server dengan data database dari hosting, set `'debug' => false`.
-3. Jalankan `npm run build` (alamat API production sudah otomatis dipilih).
-4. Upload **isi** folder `dist/` dan folder `backend/` ke `htdocs/` di server (FTP atau File Manager). Jangan menimpa `config.php` di server dengan versi lokal.
-5. Pastikan `.htaccess` ikut terupload. File di `public/.htaccess` mengarahkan semua alamat halaman ke `index.html` supaya React Router berfungsi saat halaman di-refresh.
-6. Jangan hapus folder `backend/public/uploads/` di server karena isinya gambar produk yang sudah diupload.
-
 ## Batasan yang diketahui
 
 - **Pembayaran dikonfirmasi manual oleh admin.** Belum memakai payment gateway, dan nomor "Virtual Account" adalah nomor tetap dari pengaturan, bukan VA yang dibuat per pesanan.
