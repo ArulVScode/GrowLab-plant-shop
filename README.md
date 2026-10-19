@@ -1,35 +1,50 @@
-# React + Vite
+<h1 align="center">GrowLab</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<p align="center">
+  Toko online perawatan tanaman dengan panel admin.<br>
+  Katalog produk, keranjang, checkout, pelacakan pesanan, dan manajemen toko dalam satu aplikasi.
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+  <img alt="React" src="https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+  <img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+  <img alt="PHP" src="https://img.shields.io/badge/PHP-8%2B-777BB4?style=for-the-badge&logo=php&logoColor=white">
+  <img alt="MySQL" src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+<p align="center">
+  <a href="https://kelompok-10-growlab.wuaze.com">
+    <img alt="Buka demo" src="https://img.shields.io/badge/Demo-Buka_website-3F8F1B?style=for-the-badge">
+  </a>
+</p>
 
-## React Compiler
+<p align="center">
+  <sub>Demo berjalan di hosting gratis (InfinityFree), jadi bisa lambat atau sesekali tidak bisa dibuka.</sub>
+</p>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-
-# GrowLab
-
-Toko online perawatan tanaman: katalog produk (pupuk, nutrisi, obat tanaman, benih, media tanam, alat berkebun), keranjang, checkout, pelacakan pesanan, dan panel admin untuk mengelola semuanya.
-
-Dibuat sebagai tugas kuliah **[ISI NAMA MATA KULIAH]**, Teknik Informatika, Universitas Pamulang.
-
-**Demo:** https://kelompok-10-growlab.wuaze.com
-
-> Catatan: demo berjalan di hosting gratis (InfinityFree), jadi bisa lambat atau sesekali tidak bisa dibuka.
+Dibuat sebagai tugas kuliah Teknik Informatika, Universitas Pamulang.
 
 <!--
 ## Tampilan
 Taruh screenshot di folder docs/screenshots lalu tampilkan di sini, contoh:
 ![Halaman produk](docs/screenshots/products.png)
 -->
+
+## Daftar isi
+
+- [Fitur](#fitur)
+- [Teknologi](#teknologi)
+- [Struktur proyek](#struktur-proyek)
+- [Menjalankan di komputer sendiri](#menjalankan-di-komputer-sendiri)
+- [Akun demo](#akun-demo)
+- [Ringkasan API](#ringkasan-api)
+- [Deploy ke shared hosting](#deploy-ke-shared-hosting)
+- [Batasan yang diketahui](#batasan-yang-diketahui)
+- [Catatan pengembangan](#catatan-pengembangan)
+- [Pembuat](#pembuat)
 
 ## Fitur
 
@@ -92,8 +107,8 @@ pupuk-tanaman/
 ### 1. Ambil proyek
 
 ```bash
-git clone <URL-REPO-INI>
-cd pupuk-tanaman
+git clone https://github.com/ArulVScode/GrowLab-plant-shop.git
+cd GrowLab-plant-shop
 npm install
 ```
 
@@ -120,15 +135,15 @@ Alternatif: letakkan folder proyek di `htdocs` XAMPP dan pakai Apache.
 
 ### 5. Atur alamat API di frontend
 
-Buka `src/services/apiClient.js`, lalu sesuaikan `API_BASE_URL` dengan alamat backend:
+Buka `src/services/apiClient.js`, lalu pastikan `API_BASE_URL` seperti ini:
 
 ```js
-// pengembangan lokal (php -S ... seperti di atas)
-const API_BASE_URL = "http://localhost:8000/api";
-
-// production (frontend dan backend di domain yang sama)
-// const API_BASE_URL = `${window.location.origin}/backend/public/api`;
+const API_BASE_URL = import.meta.env.DEV
+  ? "http://localhost:8000/api" // pengembangan lokal (php -S ... seperti di atas)
+  : `${window.location.origin}/backend/public/api`; // production (satu domain)
 ```
+
+Saat `npm run dev` yang dipakai alamat pertama, saat `npm run build` otomatis alamat kedua. Kalau backend lokal kamu jalan di alamat lain (misalnya lewat Apache XAMPP), ganti alamat pertama.
 
 ### 6. Jalankan frontend
 
@@ -172,9 +187,9 @@ Tabel utama: `admins`, `admin_tokens`, `customers`, `customer_tokens`, `customer
 Proyek ini dijalankan di hosting gratis (InfinityFree) dengan cara berikut:
 
 1. Buat database di panel hosting, lalu import `schema.sql` dan `seed.sql` lewat phpMyAdmin (hapus baris `CREATE DATABASE` dan `USE ...` dari file SQL dulu kalau hosting menolaknya).
-2. Isi `backend/config/config.php` dengan data database dari hosting, set `'debug' => false`.
-3. Set `API_BASE_URL` ke `` `${window.location.origin}/backend/public/api` ``, lalu `npm run build`.
-4. Upload **isi** folder `dist/` dan folder `backend/` ke `htdocs/` di server (FTP atau File Manager).
+2. Isi `backend/config/config.php` di server dengan data database dari hosting, set `'debug' => false`.
+3. Jalankan `npm run build` (alamat API production sudah otomatis dipilih).
+4. Upload **isi** folder `dist/` dan folder `backend/` ke `htdocs/` di server (FTP atau File Manager). Jangan menimpa `config.php` di server dengan versi lokal.
 5. Pastikan `.htaccess` ikut terupload. File di `public/.htaccess` mengarahkan semua alamat halaman ke `index.html` supaya React Router berfungsi saat halaman di-refresh.
 6. Jangan hapus folder `backend/public/uploads/` di server karena isinya gambar produk yang sudah diupload.
 
@@ -188,12 +203,8 @@ Proyek ini dijalankan di hosting gratis (InfinityFree) dengan cara berikut:
 
 ## Catatan pengembangan
 
-Proyek ini kami kerjakan sambil belajar, dan kami masih di tahap belajar. Sebagian pekerjaan dibantu asisten AI (Claude dari Anthropic), antara lain data seed, perbaikan bug, fitur upload gambar dan pengaturan pembayaran, panduan deployment, serta README ini. Kode tersebut kami jalankan, uji, dan sesuaikan sendiri, tapi mungkin masih ada kekurangan. Saran dan masukan sangat kami terima lewat Issues atau Pull Request.
+Proyek ini saya kerjakan sambil belajar, dan saya masih di tahap belajar. Sebagian pekerjaan dibantu asisten AI (Claude dari Anthropic), antara lain data seed, perbaikan bug, fitur upload gambar dan pengaturan pembayaran, panduan deployment, serta README ini. Kodenya saya jalankan, uji, dan sesuaikan sendiri, tapi mungkin masih ada kekurangan. Saran dan masukan sangat diterima lewat Issues atau Pull Request.
 
 ## Pembuat
 
-**ArulVScode**
-
-| Nama             |
-| ---------------- |
-| Muh. Asrul Mulis |
+**Muh. Asrul Mulis** ([@ArulVScode](https://github.com/ArulVScode)), Teknik Informatika.
